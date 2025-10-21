@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import QuickImageGallery from "./QuickImageGallery";
 import AddBtn from "@/src/utilits/AddBtn";
-import { colorList } from "@/src/api/colorApi";
+import ProductColors from "./ProductColors";
 
 const QuickView = () => {
   return (
@@ -47,7 +47,7 @@ const QuickView = () => {
               </p>
 
               {/* Color Options */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
+              {/* <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
                 {colorList &&
                   colorList.map((clr: string, i: number) => (
                     <p
@@ -57,7 +57,8 @@ const QuickView = () => {
                       {clr.toUpperCase()}
                     </p>
                   ))}
-              </div>
+              </div> */}
+              <ProductColors/>
 
               {/* Add to Cart */}
               <div className="mt-5">

@@ -42,10 +42,15 @@ const SideCartbar = () => {
 
       <SheetContent>
         <div className="relative">
-          <div className="py-4 border-b flex flex-col px-4 gap-1">
+          <div className="py-4 border-b flex items-center justify-between px-4 gap-1">
             <p className="text-base font-medium text-primary">
               {cartList.length} items in cart
             </p>
+            <p className="hover:text-[#AC0000] duration-300 cursor-pointer">
+              <SheetClose asChild>
+              <X size={18} />
+              </SheetClose>
+              </p>
           </div>
 
           <div className="p-4 flex flex-col gap-3">

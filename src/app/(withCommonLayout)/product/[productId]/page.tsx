@@ -1,8 +1,9 @@
 
-import { colorList } from "@/src/api/colorApi";
+
 import Navbar from "@/src/components/header/Navbar";
 import ImageGallery from "@/src/components/products/ImageGallery";
 import ProductAccordion from "@/src/components/products/ProductAccordion";
+import ProductColors from "@/src/components/products/ProductColors";
 import RecientViewProducts from "@/src/components/products/RecientViewProducts";
 import ReletiveProducts from "@/src/components/products/ReletiveProducts";
 import AddBtn from "@/src/utilits/AddBtn";
@@ -66,7 +67,7 @@ const page = async () => {
                 user-friendly layout.
               </p>
 
-             <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
+             {/* <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4">
                              {colorList &&
                                colorList.map((clr: string, i: number) => (
                                  <p
@@ -76,7 +77,8 @@ const page = async () => {
                                    {clr.toUpperCase()}
                                  </p>
                                ))}
-                           </div>
+                           </div> */}
+                           <ProductColors/>
             </div>
 
             <div className=" mt-4">

@@ -123,7 +123,7 @@ const Footer = () => {
               />
 
               <input
-                className="px-4 py-3 border border-white/20  hover:bg-secondary duration-300 cursor-pointer bg-primary text-white text-sm mt-2"
+                className="px-4 py-3 border border-white/20  hover:bg-[#AC0000] duration-300 cursor-pointer bg-primary text-white text-sm mt-2"
                 type="submit"
                 value="Subscribers"
               />

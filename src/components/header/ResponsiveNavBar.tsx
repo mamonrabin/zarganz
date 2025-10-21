@@ -1,8 +1,8 @@
 "use client";
 
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, ChevronUp, Menu, Search } from "lucide-react";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ChevronDown, ChevronUp, Menu, Search, X } from "lucide-react";
 import subImage from "@/src/assets/category/c1.png"
 import subImage2 from "@/src/assets/category/c2.png"
 import subImage3 from "@/src/assets/category/c3.png"
@@ -25,11 +25,18 @@ const ResponsiveSidBar = ({ MenuIconStyle }: Props) => {
         <Menu className={`text-2xl cursor-pointer ${MenuIconStyle}`} />
       </SheetTrigger>
       <SheetContent className="w-full px-4 py-2" side="left">
-         <h2
+         <div className="flex items-center justify-between">
+          <h2
           className={`${playfairDisplay.className} text-2xl font-bold tracking-widest` }
         >
           <Link href="/">ZARGANZ</Link>
         </h2>
+         <p className="hover:text-[#AC0000] duration-300 cursor-pointer">
+              <SheetClose asChild>
+              <X size={18} />
+              </SheetClose>
+              </p>
+         </div>
 
         <div className="mt-2">
            <form className="w-full flex items-center justify-between gap-2 border rounded border-gray-200 hover:border-gray-300 duration-300 py-2 px-2">
@@ -44,7 +51,9 @@ const ResponsiveSidBar = ({ MenuIconStyle }: Props) => {
 
            <div className="mt-4">
               <ul className="flex flex-col gap-3 text-base font-medium uppercase">
+                <Link href="/">
                 <li className="tracking-wider">Home</li>
+                </Link>
                 {/* Shop with Submenu */}
         <li className="tracking-wider relative">
           <button
@@ -61,7 +70,8 @@ const ResponsiveSidBar = ({ MenuIconStyle }: Props) => {
 
           {/* Submenu */}
           {open && (
-            <div className="mt-2 flex flex-col gap-2 text-sm normal-case">
+            <Link href="/shop">
+              <div className="mt-2 flex flex-col gap-2 text-sm normal-case">
               <div className="flex items-center gap-2">
                   <Image src={subImage} alt="category" width={50} height={50} />
                   <p className="uppercase md:text-xl text-lg font-medium tracking-wider">HANDBAGs</p>
@@ -79,11 +89,16 @@ const ResponsiveSidBar = ({ MenuIconStyle }: Props) => {
                   <p className="uppercase md:text-xl text-lg font-medium tracking-wider">PERFUMES</p>
               </div>
             </div>
+            </Link>
           )}
         </li>
 
+                <Link href="/about">
                 <li className="tracking-wider">about us</li>
+                </Link>
+                <Link href="/contact">
                 <li className="tracking-wider">contact us</li>
+                </Link>
                 
               </ul>
            </div>
@@ -108,7 +123,7 @@ const ResponsiveSidBar = ({ MenuIconStyle }: Props) => {
       <div className="flex items-center gap-1 text-sm mt-2">
         <p className="text-base"><CiMobile1  />
 </p>
-<p className="text-sm tracking-wider">01600057772</p>
+<p className="text-sm tracking-wider">+8801746770324</p>
       </div>
     </div>
       </SheetContent>
