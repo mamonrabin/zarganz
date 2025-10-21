@@ -6,6 +6,7 @@ import Image from "next/image";
 import React from "react";
 
 import { categoryList } from "@/src/api/shopCategoryApi";
+import Link from "next/link";
 
 
 
@@ -23,8 +24,9 @@ const ShopByCategory = () => {
       {/* Cards */}
       <div className="grid lg:grid-cols-3 gap-2 mt-4">
         {categoryList.slice(0, 3).map((category, i) => (
-          <div
-            key={category.id}
+          <Link href="/shop" key={category.id}>
+            <div
+            
             className="border group border-primary/10 rounded-[2px] relative overflow-hidden cursor-pointer"
          
           >
@@ -43,6 +45,7 @@ const ShopByCategory = () => {
               </p>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>

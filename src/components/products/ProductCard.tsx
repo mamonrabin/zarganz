@@ -84,11 +84,12 @@ const ProductCard: React.FC<productProps> = ({
         >
           {title}
         </h2>
-        <div className={`flex items-center gap-3 ${priceSize}`}>
-          {mrpPrice && (
-            <p className="text-[red] line-through">TK.{mrpPrice}.00</p>
-          )}
+        <div className={`flex items-center gap-2 ${priceSize}`}>
           <p className={`${priceColor}`}>TK.{price}.00</p>
+          {mrpPrice && (
+            <p className="text-[red] flex items-center line-through">TK.{mrpPrice} <span className="hidden md:block">.00</span></p>
+          )}
+          
         </div>
       </div>
     </div>

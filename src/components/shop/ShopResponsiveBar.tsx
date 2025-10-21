@@ -197,11 +197,11 @@ const ShopResponsiveBar = () => {
                 })}
 
                 {/* Bottom Button */}
-                <div className="fixed bottom-5">
+                <div className="fixed bottom-5 ">
                   <button
                   onClick={() => setOpen(false)}
                     disabled={!hasActiveFilters}
-                    className={`xl:w-[70vh] lg:w-[70vh] md:w-[70vh] sm:w-[70vh] w-[55vh] duration-300 font-medium text-center py-2.5 text-sm uppercase tracking-widest cursor-pointer ${
+                    className={`xl:w-[70vh] lg:w-[70vh] md:w-[50vh] sm:w-[50vh] w-[40vh] duration-300 font-medium text-center py-2.5 text-sm uppercase tracking-widest cursor-pointer ${
                       hasActiveFilters
                         ? "bg-black text-white hover:scale-95"
                         : "bg-gray-300 text-gray-600 cursor-not-allowed"

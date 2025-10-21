@@ -1,6 +1,7 @@
 "use client";
 
 import ProductsSlider from "@/src/slider/ProductsSlider";
+import Link from "next/link";
 import React, { useRef } from "react";
 
 
@@ -23,10 +24,12 @@ const NewArrivals = () => {
           <ProductsSlider/>
         </div>
         <div className="flex justify-center mt-4">
+          <Link href="/shop">
           <button className="relative overflow-hidden bg-[#262626] px-8 py-2 text-white font-semibold md:text-sm text-[12px] cursor-pointer group">
-  <span className="absolute inset-0 bg-[#AC0000]  scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-out"></span>
-  <span className="relative z-10">View All</span>
-</button>
+            <span className="absolute inset-0 bg-[#AC0000]  scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 ease-out"></span>
+            <span className="relative z-10">View All</span>
+          </button>
+          </Link>
         </div>
       </div>
     </div>

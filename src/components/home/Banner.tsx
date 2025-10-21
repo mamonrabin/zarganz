@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
 import { bannerList } from "@/src/api/bannerApi";
+import Link from "next/link";
 // import { TBanners } from "@/types";
 
 // interface BannerProps {
@@ -52,9 +53,11 @@ const Banner = () => {
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
               className="absolute flex bottom-[5%] left-1/2 -translate-x-1/2"
             >
+              <Link href="/shop">
               <button className="text-white hover:text-[#AC0000]  underline duration-300 transition-all rounded uppercase text-sm font-medium tracking-widest cursor-pointer">
                 {banner.linkTitle}
               </button>
+              </Link>
             </motion.div>
           </div>
         </SwiperSlide>
