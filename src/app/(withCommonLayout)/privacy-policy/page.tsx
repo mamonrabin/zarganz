@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "soza | privacy policy",
+  title: "zarganz | privacy policy",
   description: "Best E-commerce platform for your business",
 };
 
@@ -20,23 +20,23 @@ const page = () => {
         logoStyle="left-1/2 text-[#262626] lg:scale-30  scale-50"
         logoText2="lg:text-8xl text-4xl font-semibold tracking-[26px]"
       />
-      <div className="Container py-6 lg:mt-12">
+      <div className="Container py-6 mt-12">
         <div className="flex flex-col gap-2 lg:gap-4">
           <div className="md:text-2xl text-xl  font-semibold text-[#262626] text-center mt-4">
             Privacy Policies
           </div>
 
           <div className="policy-page-text">
-            soza respects and protects the privacy of our customers and users
-            who visit our websites. soza knows that you care how information
+            zarganz respects and protects the privacy of our customers and users
+            who visit our websites. zarganz knows that you care how information
             about you is used and shared, and we appreciate your trust that we
             will do so carefully and sensibly.
           </div>
 
           <div className="policy-page-text ">
             You are advised to read the Privacy Policy carefully. By accessing
-            the services provided by soza.com you agree to the collection and
-            use of your data by soza.com in the manner provided in this Privacy
+            the services provided by zarganz.com you agree to the collection and
+            use of your data by zarganz.com in the manner provided in this Privacy
             Policy.
           </div>
 
@@ -168,7 +168,7 @@ const page = () => {
               <li>
                 to help investigate, prevent or take action regarding unlawful
                 and illegal activities, suspected fraud, potential threat to the
-                safety or security of any person, violations of soza.com s terms
+                safety or security of any person, violations of zarganz.com s terms
                 of use or to defend against legal claims
               </li>
               <li>
@@ -191,8 +191,8 @@ const page = () => {
             <div className="policy-page-text">
               You may change your interests at any time and may opt-in or
               opt-out of any marketing / promotional / newsletters mailings.
-              soza.com reserves the right to send you certain service related
-              communication, considered to be a part of your soza.com account
+              zarganz.com reserves the right to send you certain service related
+              communication, considered to be a part of your zarganz.com account
               without offering you the facility to opt-out. You may update your
               information and change your account settings at any time.
             </div>
@@ -229,9 +229,9 @@ const page = () => {
             You have the right to require us to correct any inaccuracies in your
             data free of charge. At any stage, you also have the right to ask us
             to stop using your personal data for direct marketing purposes. If
-            you at any stage want to delete your personal data from soza, across
+            you at any stage want to delete your personal data from zarganz, across
             all platforms, you have the full right to do so. Please send an
-            email to support@soza.com, we will process your request within the
+            email to support@zarganz.com, we will process your request within the
             next business day and will notify you about the update.
           </div>
 

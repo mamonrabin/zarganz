@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "soza | terms & conditions",
+  title: "zarganz | terms & conditions",
   description: "Best E-commerce platform for your business",
 };
 
@@ -20,15 +20,15 @@ const page = () => {
         logoStyle="left-1/2 text-[#262626] lg:scale-30  scale-50"
         logoText2="lg:text-8xl text-4xl font-semibold tracking-[26px]"
       />
-      <div className="Container py-6 lg:mt-12">
+      <div className="Container py-6 mt-12">
         <div className="flex flex-col gap-2 lg:gap-4">
           <div className="md:text-2xl text-xl  font-semibold text-[#262626] text-center mt-4">
             Terms & Conditions
           </div>
 
           <div className="policy-page-text">
-            soza respects and protects the privacy of our customers and
-            users who visit our websites.soza knows that you care how
+            zarganz respects and protects the privacy of our customers and
+            users who visit our websites.zarganz knows that you care how
             information about you is used and shared, and we appreciate your
             trust that we will do so carefully and sensibly.
           </div>
@@ -191,9 +191,9 @@ const page = () => {
             <div className="policy-page-text">
               You may change your interests at any time and may opt-in or
               opt-out of any marketing / promotional / newsletters mailings.
-              soza.com reserves the right to send you certain service
+              zarganz.com reserves the right to send you certain service
               related communication, considered to be a part of your
-              soza.com account without offering you the facility to opt-out.
+              zarganz.com account without offering you the facility to opt-out.
               You may update your information and change your account settings
               at any time.
             </div>
