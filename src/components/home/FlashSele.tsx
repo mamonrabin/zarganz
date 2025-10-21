@@ -8,7 +8,7 @@ import Image from "next/image";
 
 
 import FlashSaleTimer from "@/src/utilits/FlashSaleTimer";
-import { productList } from "@/src/api/productsApi";
+
 import TimerProductSlider from "@/src/slider/TimerProductSlider";
 
 const FlashSele = () => {
@@ -36,7 +36,7 @@ const FlashSele = () => {
       </div>
 
       <div className="bg-primary overflow-hidden">
-        <TimerProductSlider products={productList} />
+        <TimerProductSlider/>
       </div>
     </div>
   );

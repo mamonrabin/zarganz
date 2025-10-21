@@ -14,7 +14,7 @@ export type TProducts = {
   description: string;
   details: string;
   availability: string;
-  color: string[];
+  color: string;
   images: string[];
   code: string;
   rating: number;

@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import ProductCard from "../components/products/ProductCard";
 
+import { productList } from "@/src/api/productsApi";
 
 
 
 
 
-
-const TimerProductSlider = ({products}) => {
+const TimerProductSlider = () => {
  
   const swiperRef = useRef<SwiperClass | null>(null);
 
@@ -38,7 +38,7 @@ const TimerProductSlider = ({products}) => {
         onSwiper={(swiper) => (swiperRef.current = swiper as SwiperClass)}
         speed={1000}
       >
-        {products.map((product) => (
+        {productList.map((product) => (
           <SwiperSlide key={product.id} className="">
             <ProductCard product={product} cardImg="h-[180px]" titleColor="text-white text-[12px]" priceSize="text-[12px]" priceColor="text-white" />
           </SwiperSlide>

@@ -1,5 +1,5 @@
 "use client";
-import { productList } from "@/src/api/productsApi";
+
 import ProductsSlider from "@/src/slider/ProductsSlider";
 import React, { useRef } from "react";
 
@@ -20,7 +20,7 @@ const NewArrivals = () => {
       <div className="mt-4">
         <div
         >
-          <ProductsSlider products={productList} />
+          <ProductsSlider/>
         </div>
         <div className="flex justify-center mt-4">
           <button className="relative overflow-hidden bg-[#262626] px-8 py-2 text-white font-semibold md:text-sm text-[12px] cursor-pointer group">

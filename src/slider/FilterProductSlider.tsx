@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useRef } from "react";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
@@ -6,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import ProductCard from "../components/products/ProductCard";
 
-const FilterProductSlider = ({ filteredProducts }) => {
+const FilterProductSlider: React.FC<{ filteredProducts: { id: string | number; [key: string]: any }[] }> = ({ filteredProducts }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
 
   if (!filteredProducts || filteredProducts.length === 0) {

@@ -1,4 +1,4 @@
-import { productList } from '@/src/api/productsApi';
+
 import ProductsSlider from '@/src/slider/ProductsSlider';
 import React from 'react';
 
@@ -8,7 +8,7 @@ const RecientViewProducts = () => {
       <h2 className='text-center text-xl font-medium uppercase'>Recient view products</h2>
 
       <div className='py-8 mb-6'>
-          <ProductsSlider products={productList} />
+          <ProductsSlider />
         </div>
     </div>
   );

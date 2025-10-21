@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 
-
+import { productList } from "@/src/api/productsApi";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -9,7 +9,11 @@ import "swiper/css/navigation";
 import ProductCard from "../components/products/ProductCard";
 
 
-const ProductsSlider = ({products}) => {
+// interface productProps {
+//   products:TProducts[]
+// }
+
+const ProductsSlider = () => {
 
   const swiperRef = useRef<SwiperClass | null>(null);
 
@@ -33,7 +37,7 @@ const ProductsSlider = ({products}) => {
         onSwiper={(swiper) => (swiperRef.current = swiper as SwiperClass)}
         speed={1000}
       >
-        {products?.map((product) => (
+        {productList?.map((product) => (
           <SwiperSlide key={product.id} className="">
             <ProductCard product={product} />
           </SwiperSlide>
