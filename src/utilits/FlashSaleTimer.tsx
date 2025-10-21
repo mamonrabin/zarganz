@@ -1,7 +1,8 @@
 "use client";
 
-import CountdownBox from "@/utilits/CountdownBox";
+
 import { useEffect, useState } from "react";
+import CountdownBox from "./CountdownBox";
 
 const FlashSaleTimer = () => {
   const [timeLeft, setTimeLeft] = useState({

@@ -1,0 +1,1 @@
+export const colorList = ["red","blue","black","green","yellow","purple","pink"]

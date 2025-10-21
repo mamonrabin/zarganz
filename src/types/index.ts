@@ -26,3 +26,14 @@ export type TProducts = {
   thumbelImage: string;
   video: string;
 };
+
+export type TBlog = {
+  id:number;
+  title:string;
+  text:string;
+  author:string;
+  date:string;
+  image:string | import('next/image').StaticImageData;
+  authorImg:string | import('next/image').StaticImageData;
+  category:string;
+}

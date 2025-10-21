@@ -1,5 +1,6 @@
 "use client";
 import { Minus, Plus } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -65,7 +66,7 @@ const AddBtn: React.FC<AddBtnProps> = ({
           <div className="flex items-center gap-2 mt-2">
             <div
             onClick={handleAddToCart}
-            className="w-full  bg-[#646464] hover:bg-secondary cursor-pointer duration-300 text-white text-center py-2"
+            className="w-full  bg-[#646464] hover:bg-[#AC0000] cursor-pointer duration-300 text-white text-center py-2"
           >
             <button className="text-sm outline-none cursor-pointer uppercase tracking-widest font-medium">
               {isCartLoading ? (
@@ -77,11 +78,13 @@ const AddBtn: React.FC<AddBtnProps> = ({
           </div>
             <div
            
-            className="w-full bg-primary hover:bg-secondary cursor-pointer duration-300 text-white text-center py-2"
+            className="w-full bg-primary hover:bg-[#AC0000] cursor-pointer duration-300 text-white text-center py-2"
           >
+            <Link href="/checkout">
             <button className="text-sm outline-none cursor-pointer uppercase tracking-widest font-medium">
               Buy Now
             </button>
+            </Link>
           </div>
 
           
