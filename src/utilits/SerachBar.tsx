@@ -8,132 +8,123 @@ import {
   SheetHeader,
   SheetClose,
 } from "@/components/ui/sheet";
-import { Search, X } from "lucide-react";
-// import { useRouter } from "next/navigation";
-// import { apiBaseUrl } from "@/src/config/config";
-// import Image from "next/image";
+
+import { Search, X, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const SearchBar = () => {
-  // const router = useRouter();
-  // const [query, setQuery] = useState("");
-  // const [results, setResults] = useState<any[]>([]);
-  // const [loading, setLoading] = useState(false);
-
-  // // 🔹 Fetch suggestions while typing
-  // useEffect(() => {
-  //   const delayDebounce = setTimeout(() => {
-  //     if (query.length > 1) {
-  //       fetchProducts(query);
-  //     } else {
-  //       setResults([]);
-  //     }
-  //   }, 400); // debounce
-
-  //   return () => clearTimeout(delayDebounce);
-  // }, [query]);
-
-  // const fetchProducts = async (term: string) => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await fetch(
-  //       `${apiBaseUrl}/product/pagination?searchTerm=${encodeURIComponent(
-  //         term
-  //       )}&limit=5`,
-  //       { cache: "no-store" }
-  //     );
-  //     const data = await res.json();
-  //     setResults(data?.data?.data || []);
-  //   } catch (error) {
-  //     console.error("Search error:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // 🔹 Redirect to shop page with search term
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (query.trim()) {
-  //     router.push(`/shop?search=${encodeURIComponent(query)}`);
-  //     // ✅ Close sheet after search
-  //     const closeBtn = document.querySelector<HTMLButtonElement>(
-  //       "[data-sheet-close]"
-  //     );
-  //     closeBtn?.click();
-  //   }
-  // };
-
   return (
     <Sheet>
-      <SheetTrigger className="mt-1 cursor-pointer">
-        <p className="flex items-center gap-2 cursor-pointer uppercase lg:text-[13px] text-xl">
-          <Search size={18} />
-          {/* <span className="lg:block hidden">Search</span> */}
-        </p>
+      {/* Search Trigger */}
+      <SheetTrigger asChild>
+        <button
+          aria-label="Open search"
+          className="group cursor-pointer flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#AC0000]/10"
+        >
+          <Search
+            size={19}
+            strokeWidth={1.6}
+            className="text-current transition-all duration-300 group-hover:scale-110 group-hover:text-[#AC0000]"
+          />
+        </button>
       </SheetTrigger>
 
-      <SheetContent side="top" className="lg:px-60 py-8">
-        <SheetHeader>
-          <h1 className="text-xl uppercase font-medium">
-            What are you looking for?
-          </h1>
-
-          {/* 🔹 Input */}
-          <form
-            // onSubmit={handleSubmit}
-            className="flex items-center w-full mt-4 border-b border-[#262626]/40"
+      {/* Search Panel */}
+      <SheetContent
+        side="top"
+        className="!max-h-[90vh] overflow-y-auto border-0 bg-[#FAF9F7] px-5 pb-12 pt-10 shadow-2xl sm:px-10 lg:px-60"
+      >
+        <SheetHeader className="mx-auto w-full max-w-4xl">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center justify-between"
           >
-            <input
-              type="text"
-              
-              placeholder="Search products..."
-              className="w-full outline-none text-lg py-2"
-            />
-            <button type="submit">
-              <Search size={20} />
-            </button>
-          </form>
+            <div>
+              <p className="mb-2 text-[10px] font-semibold tracking-[0.35em] text-[#AC0000]">
+                ZARGANZ / DISCOVER
+              </p>
 
-          {/* 🔹 Suggestions */}
-          {/* {query && results.length > 0 && (
-            <div className="mt-4 bg-white border border-gray-200 rounded shadow-md max-h-64 overflow-y-auto">
-              {results.map((item) => (
-                <SheetClose asChild key={item._id}>
-                  <div
-                    onClick={() => router.push(`/product/${item.slug}`)}
-                    className="p-3 hover:bg-gray-100 cursor-pointer flex items-center gap-3"
-                  >
-                    <Image
-                      src={apiBaseUrl + item.thumbal_image}
-                      alt={item.title}
-                      className="w-12 h-12 object-cover rounded"
-                      width={40}
-                      height={40}
-                    />
-                    <div>
-                      <p className="font-medium text-sm line-clamp-1">
-                        {item.title}
-                      </p>
-                      <p className="text-xs text-gray-500">${item.price}</p>
-                    </div>
-                  </div>
-                </SheetClose>
-              ))}
+              <h2 className="font-serif text-2xl font-medium text-[#262626] sm:text-3xl">
+                What are you looking for?
+              </h2>
             </div>
-          )} */}
 
+            {/* Close Button */}
+            <SheetClose asChild>
+              <button
+                aria-label="Close search"
+                className="group cursor-pointer absolute top-10 md:right-28 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#262626] transition-all duration-300 hover:border-[#AC0000] hover:bg-[#AC0000] hover:text-white"
+              >
+                <X
+                  size={18}
+                  className="transition-transform  duration-300 group-hover:rotate-90"
+                />
+              </button>
+            </SheetClose>
+          </motion.div>
 
-          {/* {query && !loading && results.length === 0 && (
-            <p className="mt-4 text-sm text-gray-500">No products found.</p>
-          )} */}
-        </SheetHeader>
+          {/* Search Form */}
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="group mt-10 flex w-full items-center border-b border-[#262626]/25 pb-3 transition-colors duration-300 focus-within:border-[#AC0000]"
+          >
+            <Search
+              size={23}
+              strokeWidth={1.5}
+              className="mr-4 shrink-0 text-gray-400 transition-colors duration-300 group-focus-within:text-[#AC0000]"
+            />
 
-        {/* Close button */}
-        <SheetClose className="top-5 right-8 absolute" data-sheet-close>
-          <p className="w-6 h-6 flex items-center justify-center bg-white hover:bg-primary hover:text-white text-[#262626]/60 border border-[#262626]/20 rounded duration-300 cursor-pointer">
-            <X size={20} />
+            <input
+              type="search"
+              placeholder="Search products, collections..."
+              className="w-full bg-transparent py-2 text-base text-[#262626] outline-none placeholder:text-gray-400 sm:text-lg"
+            />
+
+            <button
+              type="submit"
+              aria-label="Submit search"
+              className="ml-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#262626] text-white transition-all duration-300 hover:bg-[#AC0000]"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </motion.form>
+
+          {/* Popular Searches */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-8"
+          >
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+              Popular Searches
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              {["New Arrivals", "Men", "Women", "T-Shirts", "Collections"].map(
+                (item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    className="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs text-gray-600 transition-all duration-300 hover:border-[#AC0000] hover:bg-[#AC0000] hover:text-white"
+                  >
+                    {item}
+                  </button>
+                )
+              )}
+            </div>
+          </motion.div>
+
+          {/* Bottom Text */}
+          <p className="mt-12 text-center text-[9px] tracking-[0.25em] text-gray-400">
+            FIND YOUR STYLE · ZARGANZ
           </p>
-        </SheetClose>
+        </SheetHeader>
       </SheetContent>
     </Sheet>
   );

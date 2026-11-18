@@ -1,29 +1,56 @@
+
 "use client";
-import { ChevronUp } from "lucide-react";
+
+import { ArrowUp } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const ScrollToBottomToTop = () => {
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    const toggleVisibility = () => {
-      setVisible(window.scrollY > 300);
+    const handleScroll = () => {
+      setVisible(
+        window.scrollY > 300 ||
+        document.documentElement.scrollTop > 300
+      );
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
-  return visible ? (
+
+  return (
     <button
+      type="button"
       onClick={scrollToTop}
-      className="fixed bottom-20 z-10 right-4 bg-black text-white px-2 py-2 border border-white/20 rounded cursor-pointer hover:bg-primary duration-300"
+      aria-label="Back to top"
+      aria-hidden={!visible}
+      tabIndex={visible ? 0 : -1}
+      className={`fixed bottom-6 right-6 z-[9999] cursor-pointer
+        flex h-8 w-8 items-center justify-center
+        rounded-lg bg-[#262626] text-white shadow-lg
+        transition-all duration-300
+        hover:bg-[#AC0000]
+        ${
+          visible
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-5 opacity-0"
+        }`}
     >
-      <ChevronUp size={18} />
+      <ArrowUp size={16} strokeWidth={2} />
     </button>
-  ) : null;
+  );
 };
 
 export default ScrollToBottomToTop;

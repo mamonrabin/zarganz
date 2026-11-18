@@ -30,5 +30,6 @@ export const categoryList = [
    "id": 6,
     "category": "sale",
     "image": "https://i.ibb.co.com/C3mtstsj/c6.webp"
-  }
+  },
+
   ]

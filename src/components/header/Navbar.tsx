@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, ChevronUp, Search, User } from "lucide-react";
+import { ChevronDown, User } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import SideCartbar from "../Cart/SideCartbar";
@@ -9,7 +9,7 @@ import CategorySlider from "@/src/slider/CategorySlider";
 import ResponsiveNavBar from "./ResponsiveNavBar";
 import SearchBar from "@/src/utilits/SerachBar";
 // import ResponsiveSidBar from "./ResponsiveNavBar";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 
 interface navProps {
@@ -53,37 +53,62 @@ const Navbar: React.FC<navProps> = ({
       }`}
     >
       {/* Left Menu */}
-      <div className="relative">
-        {/* Shop Dropdown Trigger */}
-        <div
-          className={`lg:flex hidden items-center gap-1 transition uppercase text-sm cursor-pointer ${titleStyle}`}
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-        >
-          <p className="cursor-pointer">Shop</p>
-          {isOpen ? (
-            <ChevronUp className="w-4 h-4 transition-transform duration-300" />
-          ) : (
-            <ChevronDown className="w-4 h-4 transition-transform duration-300" />
-          )}
-        </div>
+      {/* Shop Dropdown */}
+<div
+  className="relative"
+  onMouseEnter={() => setIsOpen(true)}
+  onMouseLeave={() => setIsOpen(false)}
+>
+  <div
+    className={`hidden lg:flex items-center gap-2 cursor-pointer uppercase text-sm tracking-wider transition-colors duration-300 ${titleStyle}`}
+  >
+    <span>Shop</span>
 
-       
-        <div
-          className={`absolute left-0 top-4 z-50  transition-all duration-500 ease-in-out overflow-hidden ${
-            isOpen ? "translate-y-0 visible" : " hidden -translate-y-5"
-          }`}
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-        >
-          <CategorySlider />
-        </div>
+    <motion.span
+      animate={{ rotate: isOpen ? 180 : 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    >
+      <ChevronDown size={16} />
+    </motion.span>
+  </div>
 
-        {/* Mobile Menu */}
-        <div className="lg:hidden block">
-          <ResponsiveNavBar MenuIconStyle={`${MenuIconStyle2}`} />
-        </div>
-      </div>
+  <AnimatePresence>
+    {isOpen && (
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 25,
+          scale: 0.96,
+          filter: "blur(8px)",
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+        }}
+        exit={{
+          opacity: 0,
+          y: 15,
+          scale: 0.98,
+          filter: "blur(5px)",
+        }}
+        transition={{
+          duration: 0.45,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="absolute left-0 top-full z-[100] origin-top-left pt-5"
+      >
+        <CategorySlider />
+      </motion.div>
+    )}
+  </AnimatePresence>
+
+  {/* Mobile Menu */}
+  <div className="lg:hidden block">
+    <ResponsiveNavBar MenuIconStyle={`${MenuIconStyle2}`} />
+  </div>
+</div>
 
       {/* Logo */}
       <div

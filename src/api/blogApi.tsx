@@ -1,6 +1,6 @@
-import blogImg01 from "@/src/assets/blogs/card-img-1.png"
-import blogImg02 from "@/src/assets/blogs/card-img-2.png"
-import blogImg03 from "@/src/assets/blogs/card-img-3.png"
+import blogImg01 from "@/src/assets/blogs/slickvscottom.webp"
+import blogImg02 from "@/src/assets/blogs/eiderjono.png"
+import blogImg03 from "@/src/assets/blogs/bestsari.png"
 
 
 import authorImg01 from "@/src/assets/blogs/avatar-1.png"

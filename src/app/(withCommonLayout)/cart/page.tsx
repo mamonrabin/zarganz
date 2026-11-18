@@ -1,178 +1,189 @@
+
 "use client";
+
 import { useState } from "react";
 import { cartList as initialCartList } from "@/src/api/cartApi";
 import Navbar from "@/src/components/header/Navbar";
-import { Trash } from "lucide-react";
+import { ArrowRight, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Page = () => {
-  // 1️⃣ Make cartList stateful
   const [cartList, setCartList] = useState(initialCartList);
 
-  // 2️⃣ Create a handler to remove product by ID
   const handleRemove = (id: number) => {
-    const updatedCart = cartList.filter((cart) => cart.id !== id);
-    setCartList(updatedCart);
+    setCartList((prev) => prev.filter((cart) => cart.id !== id));
   };
 
+  const totalAmount = cartList.reduce(
+    (total, item) => total + item.Subtotal,
+    0
+  );
+
   return (
-    <div>
+    <div className="min-h-screen bg-[#FAFAF9]">
       <Navbar
         tranlateBg="bg-red-600"
-        navMainStyle="fixed text-[#262626] bg-white z-50 w-full"
+        navMainStyle="fixed text-[#262626] bg-[#FAFAF9] z-50 w-full"
         titleStyle="text-[#262626]"
         iconStyle="text-[#262626]"
-        logoStyle="left-1/2 text-[#262626] lg:scale-30  scale-50"
+        logoStyle="left-1/2 text-[#262626] lg:scale-30 scale-50"
         logoText2="lg:text-8xl text-4xl font-semibold tracking-[26px]"
       />
 
-      <div className="Container w-full mx-auto xl:px-40 lg:px-15 md:px-20 mt-16">
-        {/* Desktop Cart */}
-        <div className="hidden lg:block">
-          <h2 className="font-medium md:text-2xl text-xl text-center py-8">
-            Your Cart
-          </h2>
-
-          <div className="grid grid-cols-7 font-medium border-t border-primary/20 py-5">
-            <div className="col-span-2">Product</div>
-            <div>Unit Price</div>
-            <div>Size</div>
-            <div>Quantity</div>
-            <div>Subtotal</div>
-            <div>Action</div>
+      <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6">
+        {/* Heading */}
+        <div className="mb-7 flex items-center justify-between border-b border-gray-200 pb-5">
+          <div>
+            <p className="mb-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#AC0000]">
+              ZARGANZ / COLLECTION
+            </p>
+            <h1 className="font-serif text-3xl text-[#262626]">
+              Shopping Bag
+            </h1>
           </div>
 
-          <div>
-            {cartList.length > 0 ? (
-              cartList.map((cart) => (
+          <span className="text-xs text-gray-500">
+            {cartList.length} Items
+          </span>
+        </div>
+
+        {cartList.length > 0 ? (
+          <div className="grid gap-7 lg:grid-cols-[1fr_310px]">
+            {/* Cart Products */}
+            <section>
+              <div className="hidden grid-cols-12 border-b border-gray-200 pb-3 text-[10px] font-semibold uppercase tracking-wider text-gray-400 sm:grid">
+                <span className="col-span-6">Product</span>
+                <span className="col-span-2">Price</span>
+                <span className="col-span-2">Qty</span>
+                <span className="col-span-2 text-right">Subtotal</span>
+              </div>
+
+              {cartList.map((cart) => (
                 <div
                   key={cart.id}
-                  className="grid grid-cols-7 items-center border-t border-primary/20 py-3"
+                  className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-gray-200 py-4 sm:grid-cols-12"
                 >
-                  <div className="col-span-2 flex xl:flex-row items-start gap-3">
-                    <div className="w-[60px] h-[50px]">
+                  <div className="flex min-w-0 items-center gap-3 sm:col-span-6">
+                    <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-md bg-[#F0EEEA]">
                       <Image
                         src={cart.thumbelImage}
-                        alt=""
-                        width={120}
-                        height={120}
-                        className="w-full h-full"
+                        alt={cart.title}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
                       />
                     </div>
-                    <p className="text-sm text-primary line-clamp-2">
-                      {cart?.title}
+
+                    <div className="min-w-0">
+                      <h3 className="line-clamp-2 text-xs font-semibold text-[#262626] sm:text-sm">
+                        {cart.title}
+                      </h3>
+                      <p className="mt-1 text-[10px] text-gray-500">
+                        Size: {cart.size || "N/A"}
+                      </p>
+                      <button
+                        onClick={() => handleRemove(cart.id)}
+                        className="mt-2 flex items-center gap-1 text-[10px] text-gray-400 transition hover:text-[#AC0000]"
+                      >
+                        <Trash2 size={12} />
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="hidden text-xs text-gray-600 sm:col-span-2 sm:block">
+                    ৳ {cart.price.toLocaleString()}
+                  </div>
+
+                  <div className="hidden text-xs text-gray-600 sm:col-span-2 sm:block">
+                    {cart.quantity}
+                  </div>
+
+                  <div className="text-right sm:col-span-2">
+                    <p className="text-xs font-semibold text-[#262626]">
+                      ৳ {cart.Subtotal.toLocaleString()}
+                    </p>
+                    <p className="mt-1 text-[10px] text-gray-400 sm:hidden">
+                      Qty: {cart.quantity}
                     </p>
                   </div>
-
-                  <div className="flex gap-2">
-                    <p className="lg:ml-3">TK. {cart?.price}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <p className="text-lg">{cart?.size || "N/A"}</p>
-                  </div>
-                  <div>
-                    <p>{cart.quantity}</p>
-                  </div>
-                  <div>TK. {cart.Subtotal}</div>
-
-                  {/* 3️⃣ Add remove button */}
-                  <button
-                    onClick={() => handleRemove(cart.id)}
-                    className="text-white cursor-pointer ml-2 rounded"
-                  >
-                    <Trash
-                      size={16}
-                      className="bg-[#C9302C] hover:bg-[#AC0000] duration-300 h-7 w-7 p-1 rounded"
-                    />
-                  </button>
                 </div>
-              ))
-            ) : (
-              <p className="text-gray-500 text-sm">Your cart is empty</p>
-            )}
+              ))}
+
+              <Link
+                href="/shop"
+                className="mt-5 inline-block text-[11px] font-medium text-gray-500 transition hover:text-[#AC0000]"
+              >
+                ← Continue Shopping
+              </Link>
+            </section>
+
+            {/* Compact Summary */}
+            <aside className="h-fit rounded-lg border border-gray-200 bg-white p-5">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-sm font-semibold text-[#262626]">
+                  Order Summary
+                </h2>
+                <ShoppingBag size={17} className="text-[#AC0000]" />
+              </div>
+
+              <div className="space-y-3 border-b border-gray-100 pb-4 text-xs">
+                <div className="flex justify-between text-gray-500">
+                  <span>Products</span>
+                  <span>{cartList.length}</span>
+                </div>
+
+                <div className="flex justify-between text-gray-500">
+                  <span>Subtotal</span>
+                  <span>৳ {totalAmount.toLocaleString()}</span>
+                </div>
+
+                <div className="flex justify-between text-gray-500">
+                  <span>Shipping</span>
+                  <span>At checkout</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between py-4">
+                <span className="text-xs font-semibold">Total</span>
+                <span className="text-lg font-bold text-[#AC0000]">
+                  ৳ {totalAmount.toLocaleString()}
+                </span>
+              </div>
+
+              <Link
+                href="/checkout"
+                className="flex h-10 items-center justify-between rounded bg-[#AC0000] px-4 text-[10px] font-semibold uppercase tracking-wider text-white transition hover:bg-[#850000]"
+              >
+                Checkout
+                <ArrowRight size={15} />
+              </Link>
+
+              <p className="mt-3 text-center text-[9px] text-gray-400">
+                Secure checkout · ZARGANZ
+              </p>
+            </aside>
           </div>
-        </div>
-
-        {/* Mobile Cart */}
-        <div className="lg:hidden block">
-          <h2 className="font-medium md:text-3xl text-xl text-center py-8">
-            Your Cart
-          </h2>
-
-          {cartList.map((cart) => (
-            <div
-              key={cart.id}
-              className="flex flex-col mb-5 bg-primary/20 hover:bg-[#E6E6E6] transition-colors duration-200 rounded"
+        ) : (
+          <div className="py-14 text-center">
+            <ShoppingBag
+              size={30}
+              className="mx-auto text-gray-400"
+              strokeWidth={1.3}
+            />
+            <h2 className="mt-4 font-serif text-2xl text-[#262626]">
+              Your bag is empty
+            </h2>
+            <Link
+              href="/shop"
+              className="mt-5 inline-flex h-10 items-center gap-2 rounded bg-[#AC0000] px-5 text-xs font-medium text-white hover:bg-[#850000]"
             >
-              <div className="bg-primary flex justify-between border-t border-black/5 py-3 px-3 rounded-t">
-                <div>
-                  <p className="text-white font-medium text-[15px] hover:underline cursor-pointer px-1">
-                    {cart?.title}
-                  </p>
-                </div>
-
-                <div className="w-[60px] h-[60px]">
-                  <Image
-                    src={cart?.thumbelImage}
-                    alt=""
-                    width={120}
-                    height={120}
-                    className="w-full h-full"
-                  />
-                </div>
-              </div>
-
-              <div className="hover:bg-[#E6E6E6] rounded-b">
-                <div className="flex justify-between border-t border-black/5 py-3 px-3">
-                  <p className="font-medium text-[15px]">Price</p>
-                  <p>৳ {cart?.price}</p>
-                </div>
-
-                <div className="flex justify-between border-t border-black/5 py-3 px-3">
-                  <p className="font-medium text-[15px]">Quantity</p>
-                  <p>{cart.quantity}</p>
-                </div>
-
-                <div className="flex justify-between border-t border-black/5 py-3 px-3">
-                  <p className="font-medium text-[15px]">Subtotal</p>
-                  <p>TK. {cart.Subtotal}</p>
-                </div>
-
-                <button
-                  onClick={() => handleRemove(cart.id)}
-                  className="text-white cursor-pointer"
-                >
-                  <Trash className="bg-[#C9302C] hover:bg-[#AC0000] duration-300 h-7 w-7 p-1 rounded" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Total and Navigation */}
-        <div className="flex flex-col gap-8 justify-between items-center my-12">
-          <div className="text-xl font-medium flex items-center gap-2">
-            <span>Total Amount TK:</span>
-            <span className="text-2xl text-primary">
-              {cartList.reduce((total, item) => total + item.Subtotal, 0)}
-            </span>
+              Continue Shopping <ArrowRight size={14} />
+            </Link>
           </div>
-
-          <Link href="/checkout" className="w-[70%] sm:w-[50%] md:w-[40%]">
-            <div className="text-white text-sm font-medium text-center bg-primary hover:bg-[#AC0000] cursor-pointer duration-300 px-2 py-2">
-              <span>Proceed To Checkout</span>
-            </div>
-          </Link>
-
-          <Link
-            href="/shop"
-            className="text-white text-sm font-semimedium text-center w-[70%] sm:w-[50%] md:w-[40%] bg-primary hover:bg-[#AC0000] px-2 py-2 mt-3 duration-300"
-          >
-            <span>Continue Shopping</span>
-          </Link>
-        </div>
-      </div>
+        )}
+      </main>
     </div>
   );
 };

@@ -1,11 +1,9 @@
+
 "use client";
 
-import React, { useState } from "react";
-
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-
-
+import { ArrowRight, Loader2, Send } from "lucide-react";
 
 interface ContactFormData {
   name: string;
@@ -18,80 +16,132 @@ const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormData>();
 
-  const [loading] = useState(false);
-
-
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
-    console.log(data)
-  }
- 
+    console.log(data);
+  };
 
-    
+  const inputStyle =
+    "w-full rounded-sm border border-gray-200 bg-[#FAFAF9] px-4 py-3 text-sm text-[#262626] outline-none transition placeholder:text-gray-400 focus:border-[#AC0000] focus:bg-white";
+
+  const errorStyle = "mt-1.5 block text-[11px] text-red-600";
 
   return (
-    <div className="mt-8">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+      {/* Name & Email */}
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
+          <label className="mb-2 block text-xs font-medium text-[#262626]">
+            Full Name <span className="text-[#AC0000]">*</span>
+          </label>
+
           <input
-            {...register("name", { required: true })}
-            className="px-4 py-2 border rounded outline-none w-full"
+            {...register("name", {
+              required: "Please enter your name",
+            })}
+            className={inputStyle}
             type="text"
-            placeholder="Name"
+            placeholder="Your name"
           />
+
           {errors.name && (
-            <span className="text-sm text-red-500">Name is required</span>
+            <span className={errorStyle}>{errors.name.message}</span>
           )}
         </div>
+
         <div>
+          <label className="mb-2 block text-xs font-medium text-[#262626]">
+            Email Address <span className="text-[#AC0000]">*</span>
+          </label>
+
           <input
-            {...register("email", { required: true })}
-            className="px-4 py-2 border rounded outline-none w-full"
+            {...register("email", {
+              required: "Please enter your email",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Please enter a valid email",
+              },
+            })}
+            className={inputStyle}
             type="email"
-            placeholder="Email"
+            placeholder="example@email.com"
           />
+
           {errors.email && (
-            <span className="text-sm text-red-500">Email is required</span>
+            <span className={errorStyle}>{errors.email.message}</span>
           )}
         </div>
-        <div>
-          <input
-            {...register("phone", { required: true })}
-            className="px-2 py-2 border rounded outline-none w-full"
-            type="tel"
-            placeholder="Phone"
-          />
-          {errors.phone && (
-            <span className="text-sm text-red-500">Phone is required</span>
-          )}
-        </div>
+      </div>
 
-        <div>
-          <textarea
-            {...register("message", { required: true })}
-            className="px-2 py-2 border rounded outline-none w-full"
-            placeholder="Your message"
-            cols={30}
-            rows={6}
-          ></textarea>
-          {errors.message && (
-            <span className="text-sm text-red-500">Message is required</span>
-          )}
-        </div>
+      {/* Phone */}
+      <div>
+        <label className="mb-2 block text-xs font-medium text-[#262626]">
+          Phone Number <span className="text-[#AC0000]">*</span>
+        </label>
 
-        <div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-2 py-2 border bg-primary hover:bg-[#AC0000] duration-300 rounded outline-none w-full text-[#fff] cursor-pointer"
-          >
-            {loading ? "Processing..." : "Send Message"}
-          </button>
-        </div>
-      </form>
-    </div>
+        <input
+          {...register("phone", {
+            required: "Please enter your phone number",
+          })}
+          className={inputStyle}
+          type="tel"
+          placeholder="+880 1XXXXXXXXX"
+        />
+
+        {errors.phone && (
+          <span className={errorStyle}>{errors.phone.message}</span>
+        )}
+      </div>
+
+      {/* Message */}
+      <div>
+        <label className="mb-2 block text-xs font-medium text-[#262626]">
+          Your Message <span className="text-[#AC0000]">*</span>
+        </label>
+
+        <textarea
+          {...register("message", {
+            required: "Please enter your message",
+          })}
+          className={`${inputStyle} min-h-[130px] resize-y`}
+          placeholder="How can we help you?"
+          rows={5}
+        />
+
+        {errors.message && (
+          <span className={errorStyle}>{errors.message.message}</span>
+        )}
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="group flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-[#AC0000] px-5 text-xs font-semibold uppercase tracking-[1.5px] text-white transition duration-300 hover:bg-[#262626] disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 size={15} className="animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            <Send size={14} />
+            Send Message
+            <ArrowRight
+              size={15}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </>
+        )}
+      </button>
+
+      <p className="text-center text-[10px] text-gray-400">
+        Your information will only be used to respond to your inquiry.
+      </p>
+    </form>
   );
 };
 

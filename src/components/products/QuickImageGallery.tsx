@@ -1,12 +1,12 @@
+
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import thumbelImage from "@/src/assets/product/tshirt.jpg";
@@ -15,55 +15,79 @@ import thumbe02 from "@/src/assets/product/tshirt12.jpg";
 import thumbe03 from "@/src/assets/product/tshirt13.jpg";
 import thumbe04 from "@/src/assets/product/tshirt14.jpg";
 
-
-const images = [thumbe01, thumbe02, thumbe03, thumbe04];
+const images = [
+  thumbelImage,
+  thumbe01,
+  thumbe02,
+  thumbe03,
+  thumbe04,
+];
 
 const QuickImageGallery = () => {
-  const allImages = [thumbelImage, ...images];
-
   return (
-    <div>
-      <div className="md:w-full hidden md:block h-full">
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="w-full overflow-hidden bg-[#f8f8f8]"
+    >
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Pagination, Autoplay]}
         slidesPerView={1}
-        navigation={false}
-        autoplay={false}
-        pagination={{ clickable: true }}
-        // autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop
-        className="overflow-hidden rounded-md"
+        spaceBetween={0}
+        loop={true}
+        pagination={{
+          clickable: true,
+          dynamicBullets: false,
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        speed={700}
+        className="quick-gallery-swiper w-full"
       >
-        {allImages.map((img, index) => (
+        {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <div className="flex justify-center items-center w-full bg-gray-50 border">
+            <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden">
               <Image
-                src={img}
-                alt={`Product ${index + 1}`}
-                width={600}
-                height={600}
-                className="md:w-full h-auto object-contain"
-                priority
+                src={image}
+                alt={`Product image ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain p-4 transition-transform duration-700 hover:scale-105"
               />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
 
-    <div>
-      <div className="flex md:hidden justify-center items-center w-full bg-gray-50 border">
-              <Image
-                src={thumbelImage}
-                alt="thumbelImage"
-                width={600}
-                height={600}
-                className="md:w-full h-auto object-contain"
-                priority
-              />
-            </div>
-    </div>
-    </div>
+      <style jsx global>{`
+        .quick-gallery-swiper {
+          padding-bottom: 35px;
+        }
+
+        .quick-gallery-swiper .swiper-pagination {
+          bottom: 8px !important;
+        }
+
+        .quick-gallery-swiper .swiper-pagination-bullet {
+          width: 7px;
+          height: 7px;
+          opacity: 1;
+          background: #d1d1d1;
+          transition: all 0.3s ease;
+        }
+
+        .quick-gallery-swiper .swiper-pagination-bullet-active {
+          width: 22px;
+          border-radius: 20px;
+          background: #ac0000;
+        }
+      `}</style>
+    </motion.div>
   );
 };
 

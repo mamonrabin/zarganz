@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -5,6 +6,8 @@ import {
   SheetClose,
   SheetContent,
   SheetFooter,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -12,126 +15,236 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { RiShoppingBagLine } from "react-icons/ri";
-import { BsSuitDiamondFill } from "react-icons/bs";
-import { X } from "lucide-react";
+import {
+  ArrowRight,
+  ShoppingBag,
+  X,
+  Plus,
+  Minus,
+  Trash2,
+} from "lucide-react";
+
 import { cartList as initialCartList } from "@/src/api/cartApi";
-import AddBtn from "@/src/utilits/AddBtn";
 
 const SideCartbar = () => {
-  const [cartList, setCartList] = useState(initialCartList);
+  const [cartList, setCartList] = useState(
+    initialCartList.map((item) => ({ ...item, quantity: 1 }))
+  );
 
-  // 🗑️ Handle remove item
   const handleRemove = (id: string | number) => {
-    const updatedList = cartList.filter((item) => item.id !== id);
-    setCartList(updatedList);
+    setCartList((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // 💰 Calculate total
-  const totalPrice = cartList.reduce((sum, item) => sum + item.price, 0);
+  const updateQuantity = (id: string | number, amount: number) => {
+    setCartList((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item
+      )
+    );
+  };
+
+  const totalPrice = cartList.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const totalItems = cartList.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
 
   return (
     <Sheet>
-      <SheetTrigger className="cursor-pointer">
-        <div className="flex items-center justify-center relative">
-          <RiShoppingBagLine size={20} />
-          <span className="rounded-full w-[15px] h-[15px] text-[10px] leading-3.5 text-white text-center bg-[#AC0000] absolute top-[-4px] left-3">
-            {cartList.length}
+      {/* Trigger */}
+      <SheetTrigger asChild>
+        <button
+          aria-label="Open shopping bag"
+          className="group cursor-pointer relative flex h-10 w-10 items-center justify-center transition-all duration-300 hover:text-[#AC0000]"
+        >
+          <RiShoppingBagLine
+            size={22}
+            className="transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+          />
+
+          <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#AC0000] px-1 text-[9px] font-bold text-white">
+            {totalItems}
           </span>
-        </div>
+        </button>
       </SheetTrigger>
 
-      <SheetContent>
-        <div className="relative">
-          <div className="py-4 border-b flex items-center justify-between px-4 gap-1">
-            <p className="text-base font-medium text-primary">
-              {cartList.length} items in cart
-            </p>
-            <p className="hover:text-[#AC0000] duration-300 cursor-pointer">
-              <SheetClose asChild>
-              <X size={18} />
-              </SheetClose>
-              </p>
-          </div>
+      {/* Drawer */}
+      <SheetContent
+        side="right"
+        className="flex w-full flex-col gap-0 border-none bg-white p-0 sm:max-w-[460px]"
+      >
+        {/* Dark Header */}
+       <SheetHeader className="border-b border-gray-100 bg-[#1C1C1C] px-5 py-4">
+  <div className="flex items-center justify-between">
+    <div>
+      <p className="text-[9px] font-medium uppercase tracking-[0.25em] text-white/50">
+        Zarganz Collection
+      </p>
 
-          <div className="p-4 flex flex-col gap-3">
-            {cartList.length > 0 ? (
-              cartList.map((cart) => (
+      <SheetTitle className="mt-1 font-serif text-xl font-medium tracking-wide text-white">
+        Shopping Bag
+        <span className="ml-2 font-sans text-xs font-normal text-white/50">
+          ({totalItems})
+        </span>
+      </SheetTitle>
+    </div>
+
+    <SheetClose asChild>
+      <button className="flex cursor-pointer h-8 w-8 items-center justify-center rounded-full border border-white/20 text-white transition hover:bg-white hover:text-[#1C1C1C]">
+        <X size={16} />
+      </button>
+    </SheetClose>
+  </div>
+</SheetHeader>
+
+        {/* Products */}
+        <div className="flex-1 overflow-y-auto bg-[#F8F8F8] px-5 py-6">
+          {cartList.length > 0 ? (
+            <div className="space-y-4">
+              {cartList.map((cart) => (
                 <div
                   key={cart.id}
-                  className="flex gap-3 border-b pb-3 items-start"
+                  className="group relative flex gap-4 bg-white p-3 transition-all duration-300 hover:shadow-md"
                 >
-                  <div className="w-[100px] h-[100px] border border-[#262626]/20">
+                  {/* Image */}
+                  <Link
+                    href="/cart"
+                    className="relative h-[125px] w-[105px] shrink-0 overflow-hidden bg-[#F3F3F3]"
+                  >
                     <Image
                       src={cart.thumbelImage}
                       alt={cart.title}
-                      width={100}
-                      height={100}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="105px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                  </div>
+                  </Link>
 
-                  <div className="flex-1">
-                    <h2 className="text-sm md:font-semibold font-medium uppercase line-clamp-1">
-                      {cart.title}
-                    </h2>
-                    <p className="text-sm font-medium">TK {cart.price}</p>
-                    <p className="text-[12px] font-medium uppercase text-[#646464] mt-1">
-                      <span>{cart.color}</span> / <span>{cart.size}</span>
-                    </p>
+                  {/* Details */}
+                  <div className="flex min-w-0 flex-1 flex-col justify-between py-1">
+                    <div>
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="line-clamp-2 text-[11px] font-bold uppercase leading-5 tracking-wider text-[#262626]">
+                          {cart.title}
+                        </h3>
 
-                    <div className="mt-2 flex items-center justify-between">
-                      <div className="w-full">
-                        <AddBtn counterBtn={true} counterStyle="w-[50%] py-0.5" />
+                        <button
+                          onClick={() => handleRemove(cart.id)}
+                          aria-label={`Remove ${cart.title}`}
+                          className="shrink-0 text-gray-300 transition-colors duration-300 hover:text-[#AC0000]"
+                        >
+                          <Trash2 size={15} />
+                        </button>
                       </div>
-                      <div
-                        onClick={() => handleRemove(cart.id)}
-                        className="hover:text-[#AC0000] duration-300 cursor-pointer"
-                      >
-                        <X size={16} />
+
+                      <p className="mt-2 text-[10px] uppercase tracking-wider text-gray-400">
+                        {cart.color} / {cart.size}
+                      </p>
+
+                      <p className="mt-2 text-sm font-bold text-[#AC0000]">
+                        TK {(cart.price * cart.quantity).toFixed(2)}
+                      </p>
+                    </div>
+
+                    {/* Quantity */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-8 items-center border border-gray-200">
+                        <button
+                          onClick={() => updateQuantity(cart.id, -1)}
+                          aria-label="Decrease quantity"
+                          className="flex h-full w-8 items-center justify-center text-gray-500 transition-colors hover:bg-[#AC0000] hover:text-white"
+                        >
+                          <Minus size={12} />
+                        </button>
+
+                        <span className="w-8 text-center text-xs font-semibold">
+                          {cart.quantity}
+                        </span>
+
+                        <button
+                          onClick={() => updateQuantity(cart.id, 1)}
+                          aria-label="Increase quantity"
+                          className="flex h-full w-8 items-center justify-center text-gray-500 transition-colors hover:bg-[#AC0000] hover:text-white"
+                        >
+                          <Plus size={12} />
+                        </button>
                       </div>
+
+                      <span className="text-[9px] font-medium uppercase tracking-wider text-gray-400">
+                        Qty: {cart.quantity}
+                      </span>
                     </div>
                   </div>
                 </div>
-              ))
-            ) : (
-              <p className="text-center text-sm text-gray-500">Cart is empty</p>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex h-full min-h-[350px] flex-col items-center justify-center text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#AC0000] shadow-sm">
+                <ShoppingBag size={30} strokeWidth={1.3} />
+              </div>
+
+              <h3 className="mt-6 font-serif text-2xl text-[#262626]">
+                Nothing here yet.
+              </h3>
+
+              <p className="mt-2 max-w-[230px] text-xs leading-6 text-gray-400">
+                Your next favorite look is waiting to be discovered.
+              </p>
+
+              <SheetClose asChild>
+                <Link
+                  href="/shop"
+                  className="mt-6 bg-[#AC0000] px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#262626]"
+                >
+                  Start Shopping
+                </Link>
+              </SheetClose>
+            </div>
+          )}
         </div>
 
-        <SheetFooter className="py-4">
-          {cartList.length > 0 && (
-            <>
-              <div className="flex items-center">
-                <SheetClose asChild>
-                  <Link href="/checkout" className="flex-1">
-                    <div className="flex items-center justify-between px-6 uppercase font-medium text-sm bg-primary text-white py-2 cursor-pointer">
-                      <p>checkout</p>
-                      <p>
-                        <BsSuitDiamondFill />
-                      </p>
-                      <p>
-                        TK <span>{totalPrice.toFixed(2)}</span>
-                      </p>
-                    </div>
-                  </Link>
-                </SheetClose>
-              </div>
+        {/* Bottom Checkout */}
+        {cartList.length > 0 && (
+         <SheetFooter className="mt-auto block border-t border-gray-100 bg-white px-5 py-4">
+  <div className="mb-3 flex items-center justify-between">
+    <span className="text-xs font-medium uppercase tracking-wider text-gray-500">
+      Subtotal
+    </span>
 
-              <div className="flex items-center">
-                <SheetClose asChild>
-                  <Link href="/cart" className="flex-1">
-                    <div className="text-center">
-                      <p className="font-medium text-gray-500 text-lg hover:text-[#AC0000] duration-300 cursor-pointer underline">
-                        view cart
-                      </p>
-                    </div>
-                  </Link>
-                </SheetClose>
-              </div>
-            </>
-          )}
-        </SheetFooter>
+    <span className="font-serif text-xl font-semibold text-[#1C1C1C]">
+      ৳{totalPrice.toLocaleString()}
+    </span>
+  </div>
+
+  <Link
+    href="/checkout"
+    className="group flex h-11 w-full items-center justify-between rounded-lg bg-[#AC0000] px-5 text-white transition-all duration-300 hover:bg-[#850000]"
+  >
+    <span className="text-xs font-semibold uppercase tracking-[0.15em]">
+      Proceed to Checkout
+    </span>
+
+    <ArrowRight
+      size={17}
+      className="transition-transform duration-300 group-hover:translate-x-1"
+    />
+  </Link>
+
+  <Link
+    href="/cart"
+    className="mt-3 block text-center text-[11px] font-medium text-gray-500 transition hover:text-[#AC0000]"
+  >
+    View Shopping Bag
+  </Link>
+</SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   );

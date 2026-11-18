@@ -1,253 +1,313 @@
 
-
 import Navbar from "@/src/components/header/Navbar";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
-  title: "zarganz | terms & conditions",
-  description: "Best E-commerce platform for your business",
+  title: "ZARGANZ | Return Policy",
+  description: "Read the ZARGANZ return and customer information policy.",
 };
 
-const page = () => {
+const policySections = [
+  {
+    number: "01",
+    title: "Information We Collect",
+    content: (
+      <>
+        <p>
+          We will automatically receive and collect certain anonymous
+          information in standard usage logs through our web server, including
+          computer-identification information obtained from cookies sent to
+          your browser, an IP address, the domain server through which you
+          access our service, and the type of computer and web browser you use.
+        </p>
+
+        <p>We may collect the following personally identifiable information:</p>
+
+        <ul>
+          <li>Name including first and last name.</li>
+          <li>Alternate email address.</li>
+          <li>Mobile phone number and contact details.</li>
+          <li>ZIP/Postal code.</li>
+          <li>
+            Financial information (like account or credit card numbers) and
+            opinions of features on our websites.
+          </li>
+          <li>Other information as per our registration process.</li>
+        </ul>
+
+        <p>We may also collect:</p>
+
+        <ul>
+          <li>About the pages you visit or access.</li>
+          <li>The links you click on our site.</li>
+          <li>The number of times you access a page.</li>
+          <li>ZIP/Postal code.</li>
+          <li>The number of times you have shopped on our website.</li>
+        </ul>
+
+        <p>
+          You can terminate your account at any time. However, your information
+          may remain stored in archive on our servers even after deletion or
+          termination of your account.
+        </p>
+      </>
+    ),
+  },
+  {
+    number: "02",
+    title: "Who Collects the Information?",
+    content: (
+      <p>
+        We will collect anonymous traffic information from you when you visit
+        our site. We will collect personally identifiable information about
+        you only as part of a voluntary registration process, online survey,
+        contest, or any combination thereof. Our advertisers may collect
+        anonymous traffic information from their own assigned cookies to your
+        browser. The site contains links to other websites. We are not
+        responsible for the privacy practices of websites which we do not own,
+        manage, or control.
+      </p>
+    ),
+  },
+  {
+    number: "03",
+    title: "Usage of Information",
+    content: (
+      <>
+        <p>We use your personal information to:</p>
+        <ul>
+          <li>
+            Make our bond stronger by understanding your interests and
+            tailoring our site.
+          </li>
+          <li>Get in touch with you when necessary.</li>
+          <li>Provide the services requested by you.</li>
+          <li>Preserve social history as governed by existing law or policy.</li>
+        </ul>
+
+        <p>We use contact information internally to:</p>
+        <ul>
+          <li>Direct our efforts for product improvement.</li>
+          <li>Contact you as a survey respondent.</li>
+          <li>Notify you if you win any contest.</li>
+          <li>
+            Send you promotional materials from our contest sponsors or
+            advertisers.
+          </li>
+        </ul>
+
+        <p>Generally, we use anonymous traffic information to:</p>
+        <ul>
+          <li>Recognize your access privileges to our websites.</li>
+          <li>
+            Track your entries in promotions, sweepstakes, and contests to
+            indicate progress and track entries, submissions, and prize
+            drawing status.
+          </li>
+          <li>Make sure that you do not see the same ad repeatedly.</li>
+          <li>Help diagnose problems with our server.</li>
+          <li>
+            Administer our websites and track sessions to better understand
+            how people use our sites.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    number: "04",
+    title: "Sharing Information with Third Parties",
+    content: (
+      <>
+        <p>
+          We will not use your financial information for any purpose other
+          than to complete a transaction with you. We do not rent, sell, or
+          share your personal information and we will not disclose any of your
+          personally identifiable information to third parties unless:
+        </p>
+        <ul>
+          <li>We have your permission.</li>
+          <li>To provide products or services you have requested.</li>
+          <li>
+            To help investigate, prevent, or take action regarding unlawful
+            activities, suspected fraud, potential threats to the safety or
+            security of any person, violations of ZARGANZ terms of use, or to
+            defend against legal claims.
+          </li>
+          <li>
+            Special circumstances such as compliance with subpoenas, court
+            orders, or requests from legal authorities or law enforcement
+            agencies.
+          </li>
+          <li>We share your information with advertisers on an aggregate basis only.</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    number: "05",
+    title: "Your Information Choices",
+    content: (
+      <>
+        <p>
+          You may change your interests at any time and may opt in or opt out
+          of marketing, promotional, or newsletter mailings. ZARGANZ reserves
+          the right to send you certain service-related communications
+          considered part of your account without offering the facility to
+          opt out. You may update your information and change your account
+          settings at any time.
+        </p>
+
+        <p>
+          Upon request, we will remove or block your personally identifiable
+          information from our database, thereby canceling your registration.
+          However, your information may remain stored in archive on our
+          servers even after deletion or termination of your account. If we
+          plan to use your personally identifiable information for commercial
+          purposes, we will notify you when we collect that information and
+          allow you to opt out.
+        </p>
+      </>
+    ),
+  },
+  {
+    number: "06",
+    title: "Security Procedures",
+    content: (
+      <p>
+        To protect against the loss, misuse, and alteration of information
+        under our control, we have appropriate physical, electronic, and
+        managerial procedures in place. Our servers are accessible only to
+        authorized personnel, and your information is shared with relevant
+        personnel on a need-to-know basis to complete transactions and provide
+        the services requested by you.
+      </p>
+    ),
+  },
+  {
+    number: "07",
+    title: "Your Rights",
+    content: (
+      <p>
+        If you are concerned about your data, you have the right to request
+        access to the personal data which we may hold or process about you.
+        You have the right to require us to correct any inaccuracies in your
+        data free of charge. At any stage, you also have the right to ask us
+        to stop using your personal data for direct marketing purposes. If
+        you want to delete your personal data from ZARGANZ across all
+        platforms, please send an email to{" "}
+        <a
+          href="mailto:support@zarganz.com"
+          className="font-medium text-[#AC0000] underline underline-offset-4"
+        >
+          support@zarganz.com
+        </a>
+        . We will process your request within the next business day and
+        notify you about the update.
+      </p>
+    ),
+  },
+  {
+    number: "08",
+    title: "Policy Updates",
+    content: (
+      <p>
+        We reserve the right to change or update this policy at any time by
+        placing a prominent notice on our site. Such changes shall be
+        effective immediately upon posting to this site.
+      </p>
+    ),
+  },
+];
+
+const Page = () => {
   return (
-    <div>
+    <main className="min-h-screen bg-[#FAFAF9]">
       <Navbar
         tranlateBg="bg-red-600"
         navMainStyle="fixed text-[#262626] bg-white z-50 w-full"
         titleStyle="text-[#262626]"
         iconStyle="text-[#262626]"
-        logoStyle="left-1/2 text-[#262626] lg:scale-30  scale-50"
+        logoStyle="left-1/2 text-[#262626] lg:scale-30 scale-50"
         logoText2="lg:text-8xl text-4xl font-semibold tracking-[26px]"
       />
-      <div className="Container py-6 mt-12">
-        <div className="flex flex-col gap-2 lg:gap-4">
-          <div className="md:text-2xl text-xl  font-semibold text-[#262626] text-center mt-4">
+
+      <div className="Container pb-16 pt-28">
+        {/* Header */}
+        <section className="border-b border-gray-200 pb-7">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[3px] text-[#AC0000]">
             Terms & Conditions
-          </div>
+          </p>
 
-          <div className="policy-page-text">
-            zarganz respects and protects the privacy of our customers and
-            users who visit our websites.zarganz knows that you care how
-            information about you is used and shared, and we appreciate your
-            trust that we will do so carefully and sensibly.
-          </div>
+          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <h1 className="font-serif text-3xl font-medium text-[#262626] sm:text-4xl">
+              Terms  <span className="text-[#AC0000]">& Conditions.</span>
+            </h1>
 
-          <div className="policy-page-text ">
-            You are advised to read the Privacy Policy carefully. By accessing
-            the services provided byTitasweb.com you agree to the collection and
-            use of your data byTitasweb.com in the manner provided in this
-            Privacy Policy.
+            <p className="max-w-sm text-xs leading-6 text-gray-500">
+              Your trust and confidence matter to us. Learn more about how
+              ZARGANZ handles and protects your information.
+            </p>
           </div>
+        </section>
 
-          <div className="policy-page-text font-semibold">
-            What information is, or may be, collected from you?
-          </div>
-
-          <div className="policy-page-text ">
-            We will automatically receive and collect certain anonymous
-            information in standard usage logs through our Web server, including
-            computer-identification information obtained from cookies sent to
-            your browser from a web server cookie stored on your hard drive an
-            IP address, assigned to the computer which you use the domain server
-            through which you access our service the type of computer you re
-            using the type of web browser you re using.
-          </div>
-
-          <div className="policy-page-text ">
-            We may collect the following personally identifiable information
-            about you -
-            <ul className="policy-page-li">
-              <li>Name including first and last name.</li>
-              <li>Alternate email address.</li>
-              <li>Mobile phone number and contact details.</li>
-              <li>ZIP/Postal code.</li>
-              <li>
-                Financial information (like account or credit card numbers) -
-                Opinions of features on our websites.
-              </li>
-              <li>Other information as per our registration process.</li>
-            </ul>
-          </div>
-
-          <div className="policy-page-text ">
-            We may also collect the following information -
-            <ul className="policy-page-li">
-              <li>About the pages you visit/access.</li>
-              <li>The links you click on our site.</li>
-              <li>The number of times you access the page.</li>
-              <li>ZIP/Postal code.</li>
-              <li>The number of times you have shopped on our web site.</li>
-            </ul>
-          </div>
-
-          <div className="policy-page-text">
-            You can terminate your account at any time. However, your
-            information may remain stored in archive on our servers even after
-            the deletion or the termination of your account.
-          </div>
-
-          <div className="policy-page-text font-semibold">
-            Who collects the information?
-          </div>
-
-          <div className="policy-page-text">
-            We will collect anonymous traffic information from you when you
-            visit our site. We will collect personally identifiable information
-            about you only as part of a voluntary registration process, on-line
-            survey, or contest or any combination there of. Our advertisers may
-            collect anonymous traffic information from their own assigned
-            cookies to your browser. The Site contains links to other Web sites.
-            We are not responsible for the privacy practices of such Web sites
-            which we do not own, manage or control.
-          </div>
-
-          <div className="policy-page-text font-semibold">
-            Usage of Information
-          </div>
-
-          <div className="policy-page-text">
-            <div>We use your personal information to:</div>
-            <ul className="policy-page-li">
-              <li>
-                Make our bond more stronger by knowing your interests and
-                tailoring our site
-              </li>
-              <li>Get in touch with you when necessary</li>
-              <li>Provide the services requested by you</li>
-              <li>
-                Preserve social history as governed by existing law or policy
-              </li>
-            </ul>
-          </div>
-
-          <div className="policy-page-text">
-            <div>We use contact information internally to:</div>
-            <ul className="policy-page-li">
-              <li>Direct our efforts for product improvement</li>
-              <li>Contact you as a survey respondent</li>
-              <li>Notify you if you win any contest; and</li>
-              <li>
-                Send you promotional materials from our contest sponsors or
-                advertisers
-              </li>
-            </ul>
-          </div>
-
-          <div className="policy-page-text">
-            <div>Generally, we use anonymous traffic information to:</div>
-            <ul className="policy-page-li">
-              <li>Recognize your access privileges to our websites</li>
-              <li>
-                Track your entries in some of our promotions, sweepstakes and
-                contests to indicate a players progress through the promotion
-                and to track entries, submissions, and status in prize drawings
-              </li>
-              <li>Make sure that you don t see the same ad repeatedly</li>
-              <li>Help diagnose problems with our server</li>
-              <li>
-                Administer our websites, track your session so that we can
-                understand better how people use our sites
-              </li>
-            </ul>
-          </div>
-
-          <div className="">
-            <div className="policy-page-text font-bold">
-              Sharing Information to Third Party
-            </div>
-            <div className="policy-page-text">
-              We will not use your financial information for any purpose other
-              than to complete a transaction with you. We do not rent, sell or
-              share your personal information and we will not disclose any of
-              your personally identifiable information to third parties unless:
-            </div>
-            <ul className="policy-page-text policy-page-li">
-              <li>we have your permission</li>
-              <li>to provide products or services you ve requested</li>
-              <li>
-                to help investigate, prevent or take action regarding unlawful
-                and illegal activities, suspected fraud, potential threat to the
-                safety or security of any person, violations ofTitasweb.com s
-                terms of use or to defend against legal claims
-              </li>
-              <li>
-                Special circumstances such as compliance with subpoenas, court
-                orders, requests/order, notices from legal authorities or law
-                enforcement agencies requiring such disclosure.
-              </li>
-              <li>
-                We share your information with advertisers on an aggregate basis
-                only.
-              </li>
-            </ul>
-          </div>
-
+        {/* Introduction */}
+        <section className="grid gap-4 border-b border-gray-200 py-7 md:grid-cols-[180px_1fr] md:gap-8">
           <div>
-            <div className="policy-page-text font-bold">
-              Available Choices Regarding Information Collection and
-              Re-distribution
-            </div>
-            <div className="policy-page-text">
-              You may change your interests at any time and may opt-in or
-              opt-out of any marketing / promotional / newsletters mailings.
-              zarganz.com reserves the right to send you certain service
-              related communication, considered to be a part of your
-              zarganz.com account without offering you the facility to opt-out.
-              You may update your information and change your account settings
-              at any time.
-            </div>
-            <div className="policy-page-text">
-              Upon request, we will remove/block your personally identifiable
-              information from our database, thereby canceling your
-              registration. However, your information may remain stored in
-              archive on our servers even after the deletion or the termination
-              of your account. If we plan to use your personally identifiable
-              information for any commercial purposes, we will notify you at the
-              time we collect that information and allow you to opt-out of
-              having your information used for those purposes.
-            </div>
+            <span className="text-[10px] font-semibold uppercase tracking-[2px] text-gray-400">
+              Introduction
+            </span>
+            <div className="mt-3 h-[2px] w-8 bg-[#AC0000]" />
           </div>
 
-          <div className="policy-page-text font-bold">
-            Security Procedures to Protect Information
-          </div>
-          <div className="policy-page-text">
-            To protect against the loss, misuse and alteration of the
-            information under our control, we have in place appropriate
-            physical, electronic and managerial procedures. For example, our
-            servers are accessible only to authorized personnel and that your
-            information is shared with respective personnel on need to know
-            basis to complete the transaction and to provide the services
-            requested by you.
-          </div>
+          <div className="max-w-3xl space-y-3 text-sm leading-7 text-gray-600">
+            <p>
+              ZARGANZ respects and protects the privacy of our customers and
+              users who visit our websites. We understand that you care how
+              information about you is used and shared, and we appreciate
+              your trust that we will do so carefully and sensibly.
+            </p>
 
-          <div className="policy-page-text font-bold">Your rights</div>
-
-          <div className="policy-page-text">
-            If you are concerned about your data you have the right to request
-            access to the personal data which we may hold or process about you.
-            You have the right to require us to correct any inaccuracies in your
-            data free of charge. At any stage, you also have the right to ask us
-            to stop using your personal data for direct marketing purposes. If
-            you at any stage want to delete your personal data fromTitasweb,
-            across all platforms, you have the full right to do so. Please send
-            an email to support@Mamondots.com, we will process your request
-            within the next business day and will notify you about the update.
+            <p>
+              You are advised to read the Privacy Policy carefully. By
+              accessing the services provided by zarganz.com, you agree to
+              the collection and use of your data by ZARGANZ in the manner
+              provided in this policy.
+            </p>
           </div>
+        </section>
 
-          <div>
-            <div className="policy-page-text font-bold">Policy updates</div>
-            <div className="policy-page-text">
-              We reserve the right to change or update this policy at any time
-              by placing a prominent notice on our site. Such changes shall be
-              effective immediately upon posting to this site.
-            </div>
-          </div>
-        </div>
+        {/* Policy Sections */}
+        <section>
+          {policySections.map((section) => (
+            <article
+              key={section.number}
+              className="group grid gap-3 border-b border-gray-200 py-6 transition-colors duration-300 hover:bg-white/60 md:grid-cols-[180px_1fr] md:gap-8 md:py-7"
+            >
+              <div className="flex items-start gap-3">
+                <span className="font-serif text-2xl text-[#AC0000]">
+                  {section.number}
+                </span>
+                <span className="mt-4 h-px w-6 bg-gray-300 transition-all group-hover:w-9 group-hover:bg-[#AC0000]" />
+              </div>
+
+              <div className="max-w-3xl">
+                <h2 className="mb-3 font-serif text-lg font-medium text-[#262626] sm:text-xl">
+                  {section.title}
+                </h2>
+
+                <div className="space-y-4 text-sm leading-7 text-gray-500 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:pl-1">
+                  {section.content}
+                </div>
+              </div>
+            </article>
+          ))}
+        </section>
+
+      
       </div>
-    </div>
+    </main>
   );
 };
 
-export default page;
+export default Page;
